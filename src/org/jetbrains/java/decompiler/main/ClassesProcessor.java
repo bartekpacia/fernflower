@@ -65,8 +65,6 @@ public class ClassesProcessor {
 
     // create class nodes
     for (StructClass cl : context.getClasses().values()) {
-      var comps = cl.getRecordComponents().stream().map(StructField::getName).collect(Collectors.joining(", "));
-      System.out.println("DEBUG (05) " + cl.qualifiedName + " record components: " + comps);
       if (cl.isOwn() && !mapRootClasses.containsKey(cl.qualifiedName)) {
         if (bDecompileInner) {
           StructInnerClassesAttribute inner = cl.getAttribute(StructGeneralAttribute.ATTRIBUTE_INNER_CLASSES);
@@ -319,6 +317,7 @@ public class ClassesProcessor {
   }
 
   public void writeClass(StructClass cl, TextBuffer buffer) throws IOException {
+    System.out.println("DEBUG (06) ClassesProcessor.writeClass(" + cl.qualifiedName + ")");
     ClassNode root = mapRootClasses.get(cl.qualifiedName);
     if (root.type != ClassNode.CLASS_ROOT) {
       return;

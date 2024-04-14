@@ -15,6 +15,7 @@ import org.jetbrains.java.decompiler.modules.decompiler.vars.VarProcessor;
 import org.jetbrains.java.decompiler.modules.decompiler.vars.VarVersionPair;
 import org.jetbrains.java.decompiler.struct.StructClass;
 import org.jetbrains.java.decompiler.struct.StructMethod;
+import org.jetbrains.java.decompiler.struct.StructRecordComponent;
 import org.jetbrains.java.decompiler.struct.attr.StructGeneralAttribute;
 import org.jetbrains.java.decompiler.struct.attr.StructLocalVariableTableAttribute;
 import org.jetbrains.java.decompiler.struct.attr.StructMethodParametersAttribute;
@@ -22,9 +23,11 @@ import org.jetbrains.java.decompiler.struct.gen.MethodDescriptor;
 import org.jetbrains.java.decompiler.util.InterpreterUtil;
 import org.jetbrains.java.decompiler.util.VBStyleCollection;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class ClassWrapper {
   private final StructClass classStruct;
@@ -43,8 +46,27 @@ public class ClassWrapper {
     DecompilerContext.getLogger().startClass(classStruct.qualifiedName);
 
     boolean testMode = DecompilerContext.getOption(IFernflowerPreferences.UNIT_TEST_MODE);
+    boolean isRecord = classStruct.hasAttribute(StructGeneralAttribute.ATTRIBUTE_RECORD);
+    var recordComponents = classStruct.getRecordComponents();
+    if (recordComponents == null) {
+      recordComponents = List.of();
+    }
+
+    if (isRecord) {
+      System.out.println("DEBUG (06) ClassStruct " + classStruct.qualifiedName + " is a record");
+    }
+
     CancellationManager cancellationManager = DecompilerContext.getCancellationManager();
-    for (StructMethod mt : classStruct.getMethods()) {
+
+    // Remove methods that have the same name as the record property
+
+    final var classMethods = classStruct.getMethods();
+    final var recordComponentNames = isRecord
+      ? recordComponents.stream().map(StructRecordComponent::getName).collect(Collectors.toSet())
+      : Collections.<String>emptySet();
+    classMethods.removeIf(method -> recordComponentNames.contains(method.getName()));
+
+    for (StructMethod mt : classMethods) {
       DecompilerContext.getLogger().startMethod(mt.getName() + " " + mt.getDescriptor());
 
       MethodDescriptor md = MethodDescriptor.parseDescriptor(mt.getDescriptor());
