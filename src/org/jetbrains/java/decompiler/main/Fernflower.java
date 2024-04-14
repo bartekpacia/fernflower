@@ -91,6 +91,8 @@ public class Fernflower implements IDecompiledData {
       converter.rename();
     }
 
+    System.out.println("DEBUG (03) Fernflower.decompileContext()");
+
     classProcessor.loadClasses(helper);
 
     structContext.saveContext();

@@ -17,6 +17,7 @@ import org.jetbrains.java.decompiler.modules.decompiler.exps.InvocationExprent;
 import org.jetbrains.java.decompiler.modules.decompiler.vars.VarVersionPair;
 import org.jetbrains.java.decompiler.struct.StructClass;
 import org.jetbrains.java.decompiler.struct.StructContext;
+import org.jetbrains.java.decompiler.struct.StructField;
 import org.jetbrains.java.decompiler.struct.StructMethod;
 import org.jetbrains.java.decompiler.struct.attr.StructEnclosingMethodAttribute;
 import org.jetbrains.java.decompiler.struct.attr.StructGeneralAttribute;
@@ -30,6 +31,7 @@ import org.jetbrains.java.decompiler.util.TextBuffer;
 import java.io.IOException;
 import java.util.*;
 import java.util.Map.Entry;
+import java.util.stream.Collectors;
 
 public class ClassesProcessor {
   public static final int AVERAGE_CLASS_SIZE = 16 * 1024;
@@ -52,6 +54,7 @@ public class ClassesProcessor {
   }
 
   public void loadClasses(IIdentifierRenamer renamer) {
+  System.out.println("DEBUG (04) ClassesProcessor.loadClasses()");
     Map<String, Inner> mapInnerClasses = new HashMap<>();
     Map<String, Set<String>> mapNestedClassReferences = new HashMap<>();
     Map<String, Set<String>> mapEnclosingClassReferences = new HashMap<>();
@@ -62,6 +65,8 @@ public class ClassesProcessor {
 
     // create class nodes
     for (StructClass cl : context.getClasses().values()) {
+      var comps = cl.getRecordComponents().stream().map(StructField::getName).collect(Collectors.joining(", "));
+      System.out.println("DEBUG (05) " + cl.qualifiedName + " record components: " + comps);
       if (cl.isOwn() && !mapRootClasses.containsKey(cl.qualifiedName)) {
         if (bDecompileInner) {
           StructInnerClassesAttribute inner = cl.getAttribute(StructGeneralAttribute.ATTRIBUTE_INNER_CLASSES);
