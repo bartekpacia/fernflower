@@ -1,31 +1,5 @@
 package records;
 
 public record TestRecordSimple(int x, int y, int z) {
-   public TestRecordSimple(int x, int y, int z) {
-      this.x = x;
-      this.y = y;
-      this.z = z;// 3
-   }
-
-   public int z() {
-      return 0;// 5
-   }
 }
 
-class 'records/TestRecordSimple' {
-   method '<init> (III)V' {
-      6      4
-      b      5
-      10      6
-      13      7
-   }
-
-   method 'z ()I' {
-      0      10
-      1      10
-   }
-}
-
-Lines mapping:
-3 <-> 7
-5 <-> 11

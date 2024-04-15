@@ -1,0 +1,28 @@
+package records;
+
+public record TestRecordExtended(int x, int y, int z) {
+   public TestRecordExtended(int var1, int var2, int var3, int var4) {
+      this(var1, var2, var3);// 5
+   }// 7
+
+   public int z() {
+      return 0;// 10
+   }
+}
+
+class 'records/TestRecordExtended' {
+   method '<init> (IIII)V' {
+      4      4
+      7      5
+   }
+
+   method 'z ()I' {
+      0      8
+      1      8
+   }
+}
+
+Lines mapping:
+5 <-> 5
+7 <-> 6
+10 <-> 9
