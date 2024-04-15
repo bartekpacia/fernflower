@@ -2,16 +2,8 @@ package records;
 
 public record TestRecordVararg(int x, int[]... y) {
    public TestRecordVararg(int x, int[]... y) {
-      this.x = x;
+      this.x = x;// 3
       this.y = y;
-   }
-
-   public int x() {
-      return this.x;
-   }
-
-   public int[][] y() {
-      return this.y;// 3
    }
 }
 
@@ -21,17 +13,7 @@ class 'records/TestRecordVararg' {
       b      5
       e      6
    }
-
-   method 'x ()I' {
-      1      9
-      4      9
-   }
-
-   method 'y ()[[I' {
-      1      13
-      4      13
-   }
 }
 
 Lines mapping:
-3 <-> 14
+3 <-> 5
