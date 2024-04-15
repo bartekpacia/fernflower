@@ -1,19 +1,5 @@
 package records;
 
 public record TestRecordVararg(int x, int[]... y) {
-   public TestRecordVararg(int x, int[]... y) {
-      this.x = x;// 3
-      this.y = y;
-   }
 }
 
-class 'records/TestRecordVararg' {
-   method '<init> (I[[I)V' {
-      6      4
-      b      5
-      e      6
-   }
-}
-
-Lines mapping:
-3 <-> 5
