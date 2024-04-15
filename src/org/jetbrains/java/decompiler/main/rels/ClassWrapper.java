@@ -46,27 +46,9 @@ public class ClassWrapper {
     DecompilerContext.getLogger().startClass(classStruct.qualifiedName);
 
     boolean testMode = DecompilerContext.getOption(IFernflowerPreferences.UNIT_TEST_MODE);
-    boolean isRecord = classStruct.hasAttribute(StructGeneralAttribute.ATTRIBUTE_RECORD);
-    var recordComponents = classStruct.getRecordComponents();
-    if (recordComponents == null) {
-      recordComponents = List.of();
-    }
-
-    if (isRecord) {
-      System.out.println("DEBUG (06) ClassStruct " + classStruct.qualifiedName + " is a record");
-    }
-
     CancellationManager cancellationManager = DecompilerContext.getCancellationManager();
 
-    // Remove methods that have the same name as the record property
-
-    final var classMethods = classStruct.getMethods();
-    final var recordComponentNames = isRecord
-      ? recordComponents.stream().map(StructRecordComponent::getName).collect(Collectors.toSet())
-      : Collections.<String>emptySet();
-    classMethods.removeIf(method -> recordComponentNames.contains(method.getName()));
-
-    for (StructMethod mt : classMethods) {
+    for (StructMethod mt : classStruct.getMethods()) {
       DecompilerContext.getLogger().startMethod(mt.getName() + " " + mt.getDescriptor());
 
       MethodDescriptor md = MethodDescriptor.parseDescriptor(mt.getDescriptor());
