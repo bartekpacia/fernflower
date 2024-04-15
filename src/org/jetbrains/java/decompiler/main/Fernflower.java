@@ -42,10 +42,6 @@ public class Fernflower implements IDecompiledData {
       catch (IllegalArgumentException ignore) { }
     }
 
-    for (final var property : properties.entrySet()) {
-      System.out.println(property.getKey() + "=" + property.getValue() + " \\");
-    }
-
     structContext = new StructContext(saver, this, new LazyLoader(provider));
     classProcessor = new ClassesProcessor(structContext);
 

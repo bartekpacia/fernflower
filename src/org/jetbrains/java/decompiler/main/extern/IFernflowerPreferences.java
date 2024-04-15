@@ -91,8 +91,6 @@ public interface IFernflowerPreferences {
     defaults.put(NEW_LINE_SEPARATOR, (InterpreterUtil.IS_WINDOWS ? "0" : "1"));
     defaults.put(INDENT_STRING, "   ");
     defaults.put(BANNER, "");
-    defaults.put(UNIT_TEST_MODE, "1");
-    defaults.put(DUMP_ORIGINAL_LINES, "1");
 
     return Collections.unmodifiableMap(defaults);
   }
