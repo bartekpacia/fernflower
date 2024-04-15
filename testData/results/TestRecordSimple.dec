@@ -1,37 +1,31 @@
 package records;
 
-public record TestRecordSimple(int x, int y) {
-   public TestRecordSimple(int x, int y) {
+public record TestRecordSimple(int x, int y, int z) {
+   public TestRecordSimple(int x, int y, int z) {
       this.x = x;
       this.y = y;
+      this.z = z;// 3
    }
 
-   public int x() {
-      return this.x;
-   }
-
-   public int y() {
-      return this.y;// 3
+   public int z() {
+      return 0;// 5
    }
 }
 
 class 'records/TestRecordSimple' {
-   method '<init> (II)V' {
+   method '<init> (III)V' {
       6      4
       b      5
-      e      6
+      10      6
+      13      7
    }
 
-   method 'x ()I' {
-      1      9
-      4      9
-   }
-
-   method 'y ()I' {
-      1      13
-      4      13
+   method 'z ()I' {
+      0      10
+      1      10
    }
 }
 
 Lines mapping:
-3 <-> 14
+3 <-> 7
+5 <-> 11
