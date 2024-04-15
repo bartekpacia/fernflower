@@ -57,18 +57,18 @@ public interface IFernflowerPreferences {
     Map<String, Object> defaults = new HashMap<>();
 
     defaults.put(REMOVE_BRIDGE, "1");
-    defaults.put(REMOVE_SYNTHETIC, "1");
+    defaults.put(REMOVE_SYNTHETIC, "0");
     defaults.put(DECOMPILE_INNER, "1");
     defaults.put(DECOMPILE_CLASS_1_4, "1");
     defaults.put(DECOMPILE_ASSERTIONS, "1");
     defaults.put(HIDE_EMPTY_SUPER, "1");
     defaults.put(HIDE_DEFAULT_CONSTRUCTOR, "1");
-    defaults.put(DECOMPILE_GENERIC_SIGNATURES, "1");
+    defaults.put(DECOMPILE_GENERIC_SIGNATURES, "0");
     defaults.put(NO_EXCEPTIONS_RETURN, "1");
     defaults.put(ENSURE_SYNCHRONIZED_MONITOR, "1");
     defaults.put(DECOMPILE_ENUM, "1");
     defaults.put(REMOVE_GET_CLASS_NEW, "1");
-    defaults.put(LITERALS_AS_IS, "1");
+    defaults.put(LITERALS_AS_IS, "0");
     defaults.put(BOOLEAN_TRUE_ONE, "1");
     defaults.put(ASCII_STRING_CHARACTERS, "0");
     defaults.put(SYNTHETIC_NOT_SET, "0");
