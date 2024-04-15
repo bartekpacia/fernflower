@@ -282,8 +282,27 @@ public class ClassWriter {
 
   @SuppressWarnings("SpellCheckingInspection")
   private static boolean isSyntheticRecordMethod(StructClass cl, StructMethod mt, TextBuffer code) {
-    if (cl.getRecordComponents() != null) {
+    final var components = cl.getRecordComponents();
+    if (components != null) {
       String name = mt.getName(), descriptor = mt.getDescriptor();
+
+      for (final var recordComponent : components) {
+        final String recordName = recordComponent.getName(), recordDescriptor = recordComponent.getDescriptor();
+
+        if (!recordName.equals(name)) {
+          continue;
+        }
+
+        if (descriptor.startsWith("()")) {
+          descriptor = descriptor.replaceAll("[()]", "");
+          final var isSameDescriptor = descriptor.equals(recordDescriptor);
+          final var isGeneratedCode = code.toString().trim().equals("return this." + recordName + ";");
+          if (isSameDescriptor && isGeneratedCode) {
+            return true;
+          }
+        }
+      }
+
       if (name.equals("equals") && descriptor.equals("(Ljava/lang/Object;)Z") ||
           name.equals("hashCode") && descriptor.equals("()I") ||
           name.equals("toString") && descriptor.equals("()Ljava/lang/String;")) {
