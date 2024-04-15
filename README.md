@@ -40,6 +40,8 @@ The rest of options can be left as they are: they are aimed at professional reve
 
 - rbr (1): hide bridge methods
 - rsy (0): hide synthetic class members
+- rrc (1): hide default record constructors
+- rrm (1): hide default record accessor methods
 - din (1): decompile inner classes
 - dc4 (1): collapse 1.4 class references
 - das (1): decompile assertions

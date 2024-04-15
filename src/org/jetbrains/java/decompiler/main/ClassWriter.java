@@ -287,7 +287,7 @@ public class ClassWriter {
    */
   private static boolean isDefaultRecordConstructor(StructClass cl, StructMethod mt, TextBuffer code) {
     final var components = cl.getRecordComponents();
-    if (components == null) {
+    if (components == null || !DecompilerContext.getOption(IFernflowerPreferences.REMOVE_RECORD_CONST)) {
       return false;
     }
 
@@ -306,7 +306,7 @@ public class ClassWriter {
     constructorDescriptor = constructorDescriptor.substring(0, constructorDescriptor.length() - 1);
     if (!componentsDescriptor.equals(constructorDescriptor)) {
       return false;
-    };
+    }
 
     final var expectedDefaultCode = new StringBuilder();
     for (final var component : components) {
@@ -324,6 +324,10 @@ public class ClassWriter {
    */
   @SuppressWarnings("SpellCheckingInspection")
   private static boolean isSyntheticRecordMethod(StructClass cl, StructMethod mt, TextBuffer code) {
+    if (!DecompilerContext.getOption(IFernflowerPreferences.REMOVE_RECORD_ACCESSOR)) {
+      return false;
+    }
+
     final var components = cl.getRecordComponents();
     if (components != null) {
       String name = mt.getName(), descriptor = mt.getDescriptor();
