@@ -182,48 +182,10 @@ public class TestSwitchNestedDeconstructionsJavac {
       }
    }
 
-   public static void testTryWithDoubleDo(Object o, Object o2) {
-      try {
-         System.out.println("1");// 168
-      } catch (Exception var16) {// 169
-         switch (o2) {// 170
-            case R2(Number var6, String var7):
-               System.out.println("10");// 171 172
-               return;// 180
-            case R2(String var8, Number var9):
-               System.out.println(o);// 174 175
-               return;
-            default:
-               System.out.println(o);// 177
-               return;
-         }
-      }
-
-   }
-
    static record R2(Object o, Object o2) {
-      R2(Object o, Object o2) {
-         this.o = o;
-         this.o2 = o2;
-      }
-
-      public Object o() {
-         return this.o;
-      }
-
-      public Object o2() {
-         return this.o2;// 183
-      }
    }
 
    static record R1(Object o) {
-      R1(Object o) {
-         this.o = o;
-      }
-
-      public Object o() {
-         return this.o;// 8
-      }
    }
 }
 
@@ -454,57 +416,10 @@ class 'pkg/TestSwitchNestedDeconstructionsJavac' {
       2fd      179
       314      153
    }
-
-   method 'testTryWithDoubleDo (Ljava/lang/Object;Ljava/lang/Object;)V' {
-      0      186
-      3      186
-      5      186
-      b      187
-      1e      188
-      81      190
-      8a      190
-      8d      190
-      b2      193
-      be      193
-      ce      196
-      d2      196
-      e9      191
-   }
-}
-
-class 'pkg/TestSwitchNestedDeconstructionsJavac$R2' {
-   method '<init> (Ljava/lang/Object;Ljava/lang/Object;)V' {
-      6      205
-      b      206
-      e      207
-   }
-
-   method 'o ()Ljava/lang/Object;' {
-      1      210
-      4      210
-   }
-
-   method 'o2 ()Ljava/lang/Object;' {
-      1      214
-      4      214
-   }
-}
-
-class 'pkg/TestSwitchNestedDeconstructionsJavac$R1' {
-   method '<init> (Ljava/lang/Object;)V' {
-      6      220
-      9      221
-   }
-
-   method 'o ()Ljava/lang/Object;' {
-      1      224
-      4      224
-   }
 }
 
 Lines mapping:
 6 <-> 5
-8 <-> 225
 14 <-> 8
 15 <-> 9
 16 <-> 10
@@ -588,16 +503,6 @@ Lines mapping:
 159 <-> 175
 162 <-> 180
 164 <-> 154
-168 <-> 187
-169 <-> 188
-170 <-> 189
-171 <-> 191
-172 <-> 191
-174 <-> 194
-175 <-> 194
-177 <-> 197
-180 <-> 192
-183 <-> 215
 Not mapped:
 35
 46
@@ -607,6 +512,3 @@ Not mapped:
 104
 128
 157
-173
-176
-179

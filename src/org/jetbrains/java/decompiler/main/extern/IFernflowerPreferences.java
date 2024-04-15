@@ -10,6 +10,8 @@ import java.util.Map;
 public interface IFernflowerPreferences {
   String REMOVE_BRIDGE = "rbr";
   String REMOVE_SYNTHETIC = "rsy";
+  String REMOVE_RECORD_CONST = "rrc";
+  String REMOVE_RECORD_ACCESSOR = "rrm";
   String DECOMPILE_INNER = "din";
   String DECOMPILE_CLASS_1_4 = "dc4";
   String DECOMPILE_ASSERTIONS = "das";
@@ -58,6 +60,8 @@ public interface IFernflowerPreferences {
 
     defaults.put(REMOVE_BRIDGE, "1");
     defaults.put(REMOVE_SYNTHETIC, "0");
+    defaults.put(REMOVE_RECORD_CONST, "1");
+    defaults.put(REMOVE_RECORD_ACCESSOR, "1");
     defaults.put(DECOMPILE_INNER, "1");
     defaults.put(DECOMPILE_CLASS_1_4, "1");
     defaults.put(DECOMPILE_ASSERTIONS, "1");
@@ -91,8 +95,6 @@ public interface IFernflowerPreferences {
     defaults.put(NEW_LINE_SEPARATOR, (InterpreterUtil.IS_WINDOWS ? "0" : "1"));
     defaults.put(INDENT_STRING, "   ");
     defaults.put(BANNER, "");
-    defaults.put(UNIT_TEST_MODE, "0");
-    defaults.put(DUMP_ORIGINAL_LINES, "0");
 
     return Collections.unmodifiableMap(defaults);
   }
