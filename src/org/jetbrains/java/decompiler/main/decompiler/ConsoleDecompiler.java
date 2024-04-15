@@ -114,7 +114,6 @@ public class ConsoleDecompiler implements IBytecodeProvider, IResultSaver {
   }
 
   public void addSource(File source) {
-    System.out.println("DEBUG (01) Added source " + source.toString());
     engine.addSource(source);
   }
 

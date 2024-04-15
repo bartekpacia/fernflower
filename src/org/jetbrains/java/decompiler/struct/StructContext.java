@@ -109,7 +109,6 @@ public class StructContext {
           classes.put(cl.qualifiedName, cl);
           unit.addClass(cl, filename);
           loader.addClassLink(cl.qualifiedName, new LazyLoader.Link(file.getAbsolutePath(), null));
-          System.out.println("DEBUG (02) StructContext.addSpace()");
         }
         catch (IOException ex) {
           String message = "Corrupted class file: " + file;
