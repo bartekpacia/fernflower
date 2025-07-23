@@ -1,0 +1,49 @@
+
+on:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  main:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clone repository
+        uses: actions/checkout@v4
+
+      - name: Install 1Password CLI
+        uses: 1password/install-cli-action@v1
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          java-version: 21
+          distribution: temurin
+
+      - name: Build
+        run: |
+          ./gradlew :distZip
+
+    #   - name: Update Homebrew formula
+    #     run: |
+    #       git config --global user.name "GitHub Actions on behalf of Bartek Pacia"
+    #       git config --global user.email "barpac02@gmail.com"
+    #       brew tap bartekpacia/tools
+    #       op run -- brew bump-formula-pr \
+    #         --message "bump version to $(git describe --tags)" \
+    #         --no-browse \
+    #         --strict \
+    #         --online \
+    #         --no-fork \
+    #         --tag "$(git describe --tags)" \
+    #         --revision "$(git rev-parse HEAD)" \
+    #         scripts
+    #     env:
+    #       OP_SERVICE_ACCOUNT_TOKEN: ${{ secrets.OP_SERVICE_ACCOUNT_TOKEN }}
+    #       HOMEBREW_GITHUB_API_TOKEN: op://Developer/GitHub/PAT
+
+      - name: Create release on GitHub
+        uses: softprops/action-gh-release@v2
+        with:
+          name: ${{ github.ref_name }}
+          files: build/distributions/fernflower.zip
